@@ -1,0 +1,68 @@
+//Thư viện
+#include <iostream>
+#include <io.h>
+#include <fcntl.h>
+
+//Rút gọn không gian tên
+using namespace std;
+
+//Hàm main
+int main()
+{
+	// Thiết lập _setmode để hỗ trợ Unicode
+	_setmode(_fileno(stdin), _O_U8TEXT);
+	_setmode(_fileno(stdout), _O_U8TEXT);
+
+	//In ra thông báo
+	wcout << L"===== APP TÍNH ĐIỂM =====\n";
+	wcout << L"Nhập điểm của bạn (từ 0 đến 10) để tính điểm trung bình và xếp loại học lực.\n";
+
+	//Khai báo biến
+	double diemToan, diemVan, diemAnh, dtb;
+
+	//Nhập điểm toán
+	wcout << L"\nNhập điểm Toán: ";
+	wcin >> diemToan;
+    
+	//Nhập điểm Văn
+	wcout << L"\nNhập điểm Văn: ";
+	wcin >> diemVan;
+
+	//Nhập điểm Anh
+	wcout << L"\nNhập điểm Anh: ";
+	wcin >> diemAnh;
+
+	//Kiểm tra điểm hợp lệ
+	if (diemToan < 0 || diemToan > 10 ||
+		diemVan < 0 || diemVan > 10 ||
+		diemAnh < 0 || diemAnh > 10)
+	{
+		wcout << L"\nĐiểm không hợp lệ. Vui lòng nhập từ 0 đến 10.";
+		return 0;
+	}
+
+	//Tính điểm trung bình
+	dtb = (diemToan + diemVan + diemAnh) / 3;
+
+	//In ra kết quả
+	wcout << L"Điểm trung bình của bạn là: " << dtb;
+	//Kiểm tra điều kiện để in ra thông báo
+	if (dtb >= 8)
+	{
+			wcout << L"\nBạn học lực giỏi";
+	}
+	else if (dtb >= 6.5)
+	{
+		wcout << L"\nBạn học lực khá";
+	}
+	else if (dtb >= 5)
+	{
+		wcout << L"\nBạn học lực trung bình";
+	}
+	else
+	{
+		wcout << L"\nBạn học lực yếu";
+	}
+	return 0;
+}
+	
